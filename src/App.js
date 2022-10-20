@@ -39,6 +39,7 @@ function App() {
             } else {
                 if (userData.username === "rick") window.location.href ="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
                 setIsSubmitted(true);
+                setErrorMessages({});
             }
         } else {
             setErrorMessages({ name: "uname", message: errors.uname });
@@ -71,12 +72,24 @@ function App() {
         </div>
     );
 
+    const renderLoggedIn = (
+        <div className="loggedIn">
+            <div>
+                <h2>User is successfully logged in</h2>
+            </div>
+            <div>
+                <button onClick={() => setIsSubmitted(false)} className="backToLogin">Back to Login</button>
+            </div>
+        </div>
+    );
+
+
 
     return (
         <div className="app">
             <div className="loginProject">
                 <div className="Sign In">
-                    {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+                    {isSubmitted ? renderLoggedIn : renderForm}
                 </div>
             </div>
         </div>
