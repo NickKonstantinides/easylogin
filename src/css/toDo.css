@@ -1,0 +1,8 @@
+.toDoItem {
+    display: flex;
+}
+
+.toDoList {
+    align-content: center;
+    list-style: none;
+}

@@ -1,99 +1,67 @@
-import './App.css';
-import React, { useState } from "react";
+import './css/App.css';
+import "./css/toDo.css";
+import React, {useState} from "react";
+import LoginForm from "./components/loginForm";
+import ToDoForm from "./components/toDoForm";
+import ToDoList from "./components/toDoList";
 
-function App() {
+export default function App() {
 
-    const [errorMessages, setErrorMessages] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const database = [
+    const userDatabase = [
         {
-            username: "user1",
-            password: "pass1"
+            name: "adminUser",
+            info: {
+                username: "admin",
+                password: "pass"
+            }
         },
         {
-            username: "user2",
-            password: "pass2"
-        },
-        {
-            username: "rick",
-            password: "roll"
+            name: "rickroll",
+            info: {
+                username: "rick",
+                password: "roll"
+            }
         }
     ];
 
-    const errors = {
-        uname: "Invalid Username",
-        pass: "Invalid Password"
-    };
+    const [user, setUser] = useState("");
+    const [error, setError] = useState("");
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const Login = loginInfo => {
+        console.log(loginInfo);
 
-        let { uname, pass } = document.forms[0];
-
-        const userData = database.find((user) => user.username === uname.value);
-
-        if (userData) {
-            if (userData.password !== pass.value) {
-                setErrorMessages({ name: "pass", message: errors.pass });
-            } else {
-                if (userData.username === "rick") window.location.href ="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                setIsSubmitted(true);
-                setErrorMessages({});
-            }
+        const userData = userDatabase.find(validUser => {
+            return(validUser.info.username === loginInfo.username);
+        });
+        if (!userData || !(userData.info.username === loginInfo.username && userData.info.password === loginInfo.password)) {
+            setError("Invalid Username or Password");
         } else {
-            setErrorMessages({ name: "uname", message: errors.uname });
+            setUser(loginInfo.username);
+            if (userData.info.username === "rick") {
+                window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            }
         }
-    };
-
-    const renderErrorMessage = (name) =>
-        name === errorMessages.name && (
-            <div className="error">{errorMessages.message}</div>
-        );
-
-    const renderForm = (
-        <div className="form">
-            <div>
-                <h2 id="formTitle">Test Form</h2>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div className="input-container">
-                    <input type="text" name="uname" placeholder="Username" required />
-                    {renderErrorMessage("uname")}
-                </div>
-                <div className="input-container">
-                    <input type="password" name="pass" placeholder="Password" required />
-                    {renderErrorMessage("pass")}
-                </div>
-                <div className="button-container">
-                    <input type="submit" />
-                </div>
-            </form>
-        </div>
-    );
-
-    const renderLoggedIn = (
-        <div className="loggedIn">
-            <div>
-                <h2>User is successfully logged in</h2>
-            </div>
-            <div>
-                <button onClick={() => setIsSubmitted(false)} className="backToLogin">Back to Login</button>
-            </div>
-        </div>
-    );
-
-
+    }
 
     return (
         <div className="app">
             <div className="loginProject">
                 <div className="Sign In">
-                    {isSubmitted ? renderLoggedIn : renderForm}
+                    {((user !== "")) ? (
+                        <div className="ToDoList">
+                            <ToDoForm/>
+                            <ToDoList/>
+                        </div>
+                    ) : (
+                        <div className="LoginForm">
+                        <LoginForm
+                            Login={Login}
+                            error={error}
+                        />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
 }
-
-export default App;
