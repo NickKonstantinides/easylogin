@@ -1,4 +1,4 @@
-input[type=text], input[type=password] {
+.input-container {
     width: 25%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -8,11 +8,11 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+.input-container:focus {
     border: 3px solid #555;
 }
 
-input[type=submit],.backToLogin {
+.button-container{
     width: 25%;
     background-color: #4CAF50;
     color: white;
@@ -24,13 +24,8 @@ input[type=submit],.backToLogin {
     cursor: pointer;
 }
 
-input[type=submit]:hover,.backToLogin:hover {
+.button-container:hover {
     background-color: #45a049;
-}
-.form {
-    margin-top: 3%;
-    text-align: center;
-    align-content: center;
 }
 
 #formTitle {

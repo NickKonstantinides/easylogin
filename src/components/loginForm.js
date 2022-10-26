@@ -1,7 +1,6 @@
 import React , {useState} from "react";
 import '../css/loginForm.css'
 
-// eslint-disable-next-line react/prop-types
 export default function LoginForm({Login, error}) {
 
     const [loginInfo, setLoginInfo] = useState({username: "", password: ""});
@@ -27,8 +26,8 @@ export default function LoginForm({Login, error}) {
                 {(error !== "") ? renderErrorMessage() : ""}
             </div>
             <form onSubmit={submitHandler}>
-                <div className="input-container">
-                    <input
+                <div>
+                    <input className="input-container"
                         type="text"
                         name="username"
                         placeholder="Username"
@@ -37,8 +36,9 @@ export default function LoginForm({Login, error}) {
                         value = {loginInfo.username}
                     />
                 </div>
-                <div className="input-container">
+                <div>
                     <input
+                        className="input-container"
                         type="password"
                         name="password"
                         placeholder="Password"
@@ -47,10 +47,12 @@ export default function LoginForm({Login, error}) {
                         value = {loginInfo.password}
                     />
                 </div>
-                <div className="button-container">
+                <div>
                     <input
+                        className="button-container"
                         type="submit"
-                        value ="Login"
+                        name="login"
+                        value="Login"
                     />
                 </div>
             </form>

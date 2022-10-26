@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import { v4 as uuid } from 'uuid';
-import { useDispatch } from 'react-redux';
-import { addTodo} from "../slices/todoSlice";
+import {v4 as uuid} from 'uuid';
+import {useDispatch} from 'react-redux';
+import {addTodo} from "../slices/todoSlice";
 import "../css/toDo.css";
 
 export default function ToDoForm() {
@@ -15,7 +15,7 @@ export default function ToDoForm() {
     const dispatch = useDispatch();
 
     function handleTaskInputChange(e) {
-        setToDo({...toDo, task: e.target.value });
+        setToDo({...toDo, task: e.target.value});
     }
 
     function handleSubmit(e) {
@@ -26,24 +26,29 @@ export default function ToDoForm() {
                 task: toDo.task,
                 time: new Date().toLocaleString()
             }));
-            alert("Task added successfully!");
         }
         setToDo({...toDo, task: ""});
     }
 
-    return(
+    return (
         <div className="toDoList">
-            <h2>Top G To-Do List</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    name="task"
-                    type="text"
-                    value={toDo.task}
-                    onChange={handleTaskInputChange}
-                />
-                <button
-                    type="submit"
-                />
+            <h2>To-Do List</h2>
+            <form>
+                <div>
+                    <input
+                        className="addTaskText"
+                        type="text"
+                        placeholder="Write your task here.."
+                        value={toDo.task}
+                        onChange={handleTaskInputChange}
+                    />
+                    <span
+                        className="addTaskButton"
+                        onClick={handleSubmit}
+                    >
+                        Add Task
+                    </span>
+                </div>
             </form>
         </div>
     );

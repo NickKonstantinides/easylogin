@@ -1,24 +1,30 @@
 import React from "react";
 import "../css/toDo.css";
+import {useDispatch} from "react-redux";
+import {deleteTodo} from "../slices/todoSlice";
 
 export default function ToDo({toDo}) {
+    const dispatch = useDispatch();
+
+    const handleDelete = () => {
+        dispatch(deleteTodo(toDo.id));
+    }
 
     return(
         <div className="toDoItem">
-            <input
-                type="checkbox"
-            />
-            <li
-                style = {{
-                    color: "black",
-                    textDecoration: toDo.completed ? "line-through" : null
-                }}
-            >
-                {toDo.task}
+            <li>
+                <text
+                    className="taskText"
+                >
+                    {toDo.task}
+                </text>
+                <span
+                    className="deleteTask"
+                    onClick={handleDelete}
+                >
+                    x
+                </span>
             </li>
-            <button
-                value="X"
-            />
         </div>
     );
 }

@@ -1,9 +1,8 @@
-import './css/App.css';
-import "./css/toDo.css";
 import React, {useState} from "react";
 import LoginForm from "./components/loginForm";
 import ToDoForm from "./components/toDoForm";
 import ToDoList from "./components/toDoList";
+import "./css/App.css";
 
 export default function App() {
 
